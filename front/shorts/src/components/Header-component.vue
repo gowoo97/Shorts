@@ -9,7 +9,16 @@
 
 <script>
 export default{
-
+    method:{
+        hasUserId:function(){
+            if((sessionStorage.getItem('userId'))==null){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
 }
 </script>
 

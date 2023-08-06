@@ -14,5 +14,5 @@ public interface MemberService {
 	public void modify(Member pre,Member post);
 	
 	//멤버 가져오기
-	public Member select(String memberId);
+	public Member login(Member member);
 }

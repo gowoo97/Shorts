@@ -1,9 +1,9 @@
 <template>
     <div id="loginBox">
         <h1>Login</h1>
-        <input type="text" placeholder="사용자 아이디"/>
-        <input type="password" placeholder="패스워드"/>
-        <input type="button" value="로그인"/>
+        <input type="text" v-model="userId" placeholder="사용자 아이디"/>
+        <input type="password" v-model="userPw" placeholder="패스워드"/>
+        <input type="button" v-on:click="login" value="로그인"/>
         <p>
             아직 회원이 아니신가요? <RouterLink to="/register"><span style="color: blue; font-size: 20px;">회원가입</span></RouterLink>
         </p>
@@ -11,8 +11,30 @@
 </template>
 
 <script>
+import axios from 'axios';
     export default{
-
+        data(){
+            return{
+                userId:'',
+                userPw:''
+            }
+        },
+        methods:{
+            login:function(){
+                axios.post('http://localhost:8080/login',{
+                    memberId:this.userId,
+                    memberPw:this.userPw
+                })
+                .then((res)=>{
+                    console.log(res);
+                    sessionStorage.setItem('userId',res.data.userId);
+                    sessionStorage.setItem('nickName',res.data.userNickname);
+                    this.$router.push( { path: "/"} );
+                }).catch(function(err){
+                    console.log(err);
+                })
+            }
+        }
     }
 </script>
 

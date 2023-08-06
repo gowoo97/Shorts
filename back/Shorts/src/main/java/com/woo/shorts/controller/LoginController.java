@@ -15,22 +15,27 @@ import com.woo.shorts.service.MemberService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/register")
-public class RegisterController {
-
+@RequestMapping("/login")
+public class LoginController {
+	
 	@Autowired
 	private MemberService memberService;
 	
 	@PostMapping
-	public ResponseEntity<MemberDTO> register(@RequestBody Member member){
+	public ResponseEntity<MemberDTO> login(@RequestBody Member member){
 		
 		try {
-			memberService.enroll(member);
-			MemberDTO memberDTO=MemberDTO.builder()
-					.userId(member.getMemberId())
-					.userNickname(member.getNickName())
-					.build();
-			return ResponseEntity.ok().body(memberDTO);
+			MemberDTO memberDTO;
+			if(memberService.login(member)!=null) {
+				memberDTO=MemberDTO.builder()
+						.userId(member.getMemberId())
+						.userNickname(member.getNickName())
+						.build();
+				return ResponseEntity.ok(memberDTO);
+			}
+			else {
+				return ResponseEntity.badRequest().body(null);
+			}
 		}catch(Exception e) {	
 			return new ResponseEntity<MemberDTO>(HttpStatus.BAD_REQUEST);
 		}

@@ -3,6 +3,7 @@ package com.woo.shorts.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.woo.shorts.dto.MemberDTO;
 import com.woo.shorts.entity.Member;
 import com.woo.shorts.repository.MemberRepository;
 
@@ -30,9 +31,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member select(String memberId) {
-		
-		return null;
+	public Member login(Member member) {
+		Member found=memberRepository.findByMemberId(member.getMemberId());
+		if(member.getMemberId().equals(found.getMemberId()) && 
+				member.getMemberPw().equals(found.getMemberPw())) {
+				return found;
+		}
+		else return null;
 	}
 
 }

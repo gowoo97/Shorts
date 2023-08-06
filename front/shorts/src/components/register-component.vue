@@ -1,25 +1,51 @@
 <template>
     <div id="registerBox">
         <h1>register</h1>
-        <input type="text" v-model="userId" v-on:input="print(userId)" placeholder="사용자 아이디"/>
-        <input type="password" v-model="userPw" v-on:change="print(userPw)" placeholder="패스워드"/>
-        <input type="text" v-model="userNickname" v-on:change="print(userNickname)" placeholder="닉네임"/>
-        <input type="button"  value="회원가입"/>
+        <input type="text" v-model="userId"  placeholder="사용자 아이디"/>
+        <input type="password" v-model="userPw"  placeholder="패스워드"/>
+        <input type="text" v-model="userNickname"  placeholder="닉네임"/>
+        <input type="button" v-on:click="register" value="회원가입"/>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
     export default{
         data(){
             return{
                 userId:"",
                 userPw:"",
-                userNickname:""
+                userNickname:"",
             }
         },
         methods:{
-            print:function(obj){
-                console.log(obj);
+            register:function(){
+                axios.post('http://localhost:8080/register',{
+                    memberId:this.userId,
+                    memberPw:this.userPw,
+                    nickName:this.userNickname
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.$router.push( { path: "/"} );
+                }).catch(function(err){
+                    console.log(err);
+                })
+            },
+            login:function(){
+                axios.post('http://localhost:8080/login',{
+                    userId:this.userId,
+                    userPw:this.userPw
+                })
+                .then((res)=>{
+                    console.log(res);
+                    sessionStorage.setItem('userId',res.data.userId);
+                    sessionStorage.setItem('nickName',res.data.userNickname);
+                    this.$router.push( { path: "/"} );
+                }).catch(function(err){
+                    console.log(err);
+                })
             }
         }
     }

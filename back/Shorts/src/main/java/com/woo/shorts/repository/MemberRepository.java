@@ -8,6 +8,5 @@ import com.woo.shorts.entity.Member;
 @Repository
 public interface MemberRepository extends CrudRepository<Member, Long> {
 	
-	
-	
+	Member findByMemberId(String memberId);
 }
