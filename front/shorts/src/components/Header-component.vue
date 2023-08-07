@@ -1,24 +1,45 @@
 <template>
     <div id="header">
         <div  style="margin-right: auto;"><h1>SHORTS</h1></div>
-        <div id="buttons">
+        <div class="buttons" v-if="!hasUserId" >
            <RouterLink to="/login"><input type="button" value="로그인" style="cursor: pointer;"/></RouterLink>
+        </div>
+        <div class="buttons" v-if="hasUserId">
+            <input type="button" value="로그아웃" v-on:click="logout" style="cursor: pointer"/>
         </div>
     </div>
 </template>
 
 <script>
+
 export default{
-    method:{
-        hasUserId:function(){
-            if((sessionStorage.getItem('userId'))==null){
-                return false;
-            }
-            else{
-                return true;
-            }
+    data:()=>{
+        return{
+            hasUserId:false,
         }
+    },
+    methods:{
+        setHasUserId:function(value) {
+            this.hasUserId=value;
+            console.log("renderd");
+        },
+        logout:function(){
+            sessionStorage.clear();
+            this.setHasUserId(false);
+        }
+    },
+        mounted:function(){
+        if(sessionStorage.getItem('userId')!=null){
+            this.setHasUserId(true);
+        }
+        else{
+            this.setHasUserId(false);
+        }
+        this.emitter.on('userIdCheck',()=>{
+            this.setHasUserId(true);
+        });
     }
+
 }
 </script>
 

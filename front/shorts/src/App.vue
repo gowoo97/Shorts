@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <headerComponent></headerComponent>
     <div id="content">
-      <router-view></router-view>
+      <router-view v-on:userIdCheck="console.log('hello')"></router-view>
     </div>
 
   </div>
@@ -13,7 +13,9 @@ import headerComponent from './components/Header-component.vue';
 export default {
   components:{
     headerComponent,
-  }
+  },
+
+
 }
 </script>
 

@@ -29,6 +29,7 @@ import axios from 'axios';
                     console.log(res);
                     sessionStorage.setItem('userId',res.data.userId);
                     sessionStorage.setItem('nickName',res.data.userNickname);
+                    this.emitter.emit('userIdCheck');
                     this.$router.push( { path: "/"} );
                 }).catch(function(err){
                     console.log(err);
