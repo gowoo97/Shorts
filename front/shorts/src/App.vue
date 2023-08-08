@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <headerComponent></headerComponent>
-    <div id="content">
+    <div id="content" style="overflow: hidden; ">
       <router-view v-on:userIdCheck="console.log('hello')"></router-view>
     </div>
 

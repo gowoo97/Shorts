@@ -47,6 +47,7 @@ import axios from 'axios';
     flex-direction: column;
     border: 1px solid rgb(179, 170, 170);
     width: 500px;
+    min-width: 375px;
 }
 input{
     box-sizing: border-box;

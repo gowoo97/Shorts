@@ -1,6 +1,6 @@
 <template>
     <div id="header">
-        <div  style="margin-right: auto;"><h1>SHORTS</h1></div>
+        <div  style="margin-right: auto;" v-on:click="$router.push({ path: '/'})" ><h1>SHORTS</h1></div>
         <div class="buttons" v-if="!hasUserId" >
            <RouterLink to="/login"><input type="button" value="로그인" style="cursor: pointer;"/></RouterLink>
         </div>

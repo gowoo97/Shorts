@@ -32,20 +32,6 @@ import axios from 'axios';
                 }).catch(function(err){
                     console.log(err);
                 })
-            },
-            login:function(){
-                axios.post('http://localhost:8080/login',{
-                    userId:this.userId,
-                    userPw:this.userPw
-                })
-                .then((res)=>{
-                    console.log(res);
-                    sessionStorage.setItem('userId',res.data.userId);
-                    sessionStorage.setItem('nickName',res.data.userNickname);
-                    this.$router.push( { path: "/"} );
-                }).catch(function(err){
-                    console.log(err);
-                })
             }
         }
     }
