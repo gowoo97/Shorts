@@ -46,5 +46,6 @@ import introducing from '../components/introducing-component.vue';
     align-items: center;
     height: 100%;
     position: relative;
+    transition: all 2s;
 }
 </style>

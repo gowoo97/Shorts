@@ -4,15 +4,17 @@
     <div id="content" style="overflow: hidden; ">
       <router-view v-on:userIdCheck="console.log('hello')"></router-view>
     </div>
-
+    <footerComponent></footerComponent>
   </div>
 </template>
 
 <script>
 import headerComponent from './components/Header-component.vue';
+import footerComponent from './components/footer-component.vue';
 export default {
   components:{
     headerComponent,
+    footerComponent
   },
 
 
@@ -26,7 +28,7 @@ export default {
   height: 100vh;
 }
 #content{
-  height: 100%;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;

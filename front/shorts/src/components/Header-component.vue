@@ -5,7 +5,7 @@
            <RouterLink to="/login"><input type="button" value="로그인" style="cursor: pointer;"/></RouterLink>
         </div>
         <div class="buttons" v-if="hasUserId">
-            <input type="button" value="로그아웃" v-on:click="logout" style="cursor: pointer"/>
+            <RouterLink to="/posting"><input type="button" value="글쓰기" v-on:click="posting" style="cursor: pointer"/></RouterLink>
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@ export default{
         logout:function(){
             sessionStorage.clear();
             this.setHasUserId(false);
-        }
+        },
     },
         mounted:function(){
         if(sessionStorage.getItem('userId')!=null){
