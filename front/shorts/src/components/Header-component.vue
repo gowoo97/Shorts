@@ -49,6 +49,7 @@ export default{
     justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid rgb(161, 157, 157);
+    height: 10vh;
 }
 #header > div{
     margin: 10px;

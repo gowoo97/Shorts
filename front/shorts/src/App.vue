@@ -28,10 +28,10 @@ export default {
   height: 100vh;
 }
 #content{
-  height: 80vh;
+  height: 83vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin: 10px;
 }
 </style>

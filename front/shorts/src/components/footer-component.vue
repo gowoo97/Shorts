@@ -15,10 +15,10 @@ export default{
 
 <style scoped>
 #footer{
-
+    position: fixed;
+    height: 7vh;
     bottom: 0px;
     width: 100%;
-    height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
