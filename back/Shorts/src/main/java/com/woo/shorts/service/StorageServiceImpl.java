@@ -8,16 +8,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.woo.shorts.entity.Image;
+import com.woo.shorts.entity.Posting;
 import com.woo.shorts.repository.ImageRepository;
+import com.woo.shorts.repository.PostingRepository;
 
 @Service
 public class StorageServiceImpl implements StorageService {
 	
 	@Autowired
-	private ImageRepository repository;
+	private ImageRepository imageRepository;
+	
+	@Autowired
+	private PostingRepository postingRepository; 
 
 	@Override
-	public void save(MultipartFile file) {
+	public void save(MultipartFile file,String content,String userId) {
 		try {
 			file.transferTo(Paths.get("src/main/resources/static/img/"+file.getOriginalFilename()));
 			Image image=Image.builder()
@@ -25,7 +30,15 @@ public class StorageServiceImpl implements StorageService {
 					.fileName(file.getOriginalFilename())
 					.build();
 			
-			repository.save(image);
+			imageRepository.save(image);
+			
+			Posting posting = Posting.builder().image(image).content(content)
+					.userId(userId).build();
+			
+			postingRepository.save(posting);
+			
+			
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

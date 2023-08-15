@@ -1,12 +1,12 @@
 package com.woo.shorts.entity;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,17 +19,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table
-public class Image {
+public class Posting {
 	
 	@Id	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column
 	private long seq;
 	
 	@Column
-	private String path;
+	private String userId;
+	
+	@ManyToOne
+	@JoinColumn(name = "image_seq")
+	private Image image;
 	
 	@Column
-	private String fileName;
-	
+	private String content;
 	
 }

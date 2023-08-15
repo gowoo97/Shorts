@@ -19,10 +19,12 @@ public class UploadController {
 	private StorageService storageService;
 	
 	@PostMapping
-	public void upload(@RequestParam("test") MultipartFile test) {
+	public void upload(@RequestParam("test") MultipartFile test,
+			@RequestParam("content") String content,
+			@RequestParam("userId") String userId) {
 		
-		storageService.save(test);
-
+		storageService.save(test,content,userId);
+		
 		
 	}
 }
