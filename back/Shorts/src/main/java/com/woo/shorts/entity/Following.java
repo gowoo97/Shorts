@@ -13,28 +13,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table
-public class Posting {
+public class Following {
 	
 	@Id	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column
 	private long seq;
 	
-	@Column
-	private String userId;
+	@ManyToOne
+	@JoinColumn(name = "sender")
+	private Member sender;
 	
 	@ManyToOne
-	@JoinColumn(name = "image_seq")
-	private Image image;
-	
-	@Column
-	private String content;
-	
-	
+	@JoinColumn(name = "reciever")
+	private Member reciever;
 	
 }

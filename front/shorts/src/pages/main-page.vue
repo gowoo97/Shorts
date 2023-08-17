@@ -1,9 +1,9 @@
 <template>
-    <div v-if="checkSession" >
-        <post v-for="(item , i) in posts" v-bind:key="i" :userId="hello"></post>
-        <div>hello</div>
+    <div v-if="checkSession" v-on:click="nextPage"  style="height: 100%; overflow: hidden; width: 375px;">
+        <post class="post" v-for="(item,i) in postList" v-bind:key="i" v-bind:userId="item.userId"
+        v-bind:content="item.content" v-bind:img="getPath(item.image.path,item.image.fileName)" ref="posts"> </post>
     </div>
-    <div v-on:click="test" v-else style="height: 100%; overflow: hidden;">
+    <div v-else v-on:click="test"  style="height: 100%; overflow: hidden;">
         <introducing class="titles"  v-for="content in msg" ref="msgs" v-bind:msg="content" v-bind:key="content"></introducing>
     </div>
 </template>
@@ -15,7 +15,7 @@ import axios from 'axios';
     export default{
         components:{
             introducing,
-            post,
+            post
         },
         data:function(){
             return{
@@ -38,7 +38,21 @@ import axios from 'axios';
                     let now=objs[i].$el.style.bottom;
                     now=now.replace(/[^0-9]/g,'');
                     now=((+now)+100)%300;
-                    console.log(now);
+                    objs[i].$el.style.bottom=now+"%";
+                }
+
+            },
+            getPath(path,filename){
+                return "http://localhost:8080"+path+"/"+filename;
+            },
+            nextPage:function(){
+                const size=this.$refs.posts.length;
+                const objs=this.$refs.posts;
+
+                for(var i=0;i<size;i++){
+                    let now=objs[i].$el.style.bottom;
+                    now=now.replace(/[^0-9]/g,'');
+                    now=((+now)+100)%300;
                     objs[i].$el.style.bottom=now+"%";
                 }
 
@@ -50,9 +64,9 @@ import axios from 'axios';
             }
         },
         mounted:function(){
-            axios.get("http://localhost:8080/posts/10").then((res)=>{
-                this.posts=res.data;
-                console.log(this.posts);
+            axios.get("http://localhost:8080/posts/"+sessionStorage.getItem("userId")).then((res)=>{
+                this.postList=res.data;
+                console.log(this.postList);
             });
         }
 
@@ -65,6 +79,14 @@ import axios from 'axios';
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    position: relative;
+    transition: all 2s;
+}
+.post{
+    display: flex;
+
+    flex-direction: column;
     height: 100%;
     position: relative;
     transition: all 2s;

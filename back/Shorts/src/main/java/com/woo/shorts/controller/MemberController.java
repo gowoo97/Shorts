@@ -9,24 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.woo.shorts.entity.Posting;
-import com.woo.shorts.service.PostsService;
+import com.woo.shorts.entity.Member;
+import com.woo.shorts.service.MemberService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/posts")
-public class PostsController {
-	
+@RequestMapping("/member")
+public class MemberController {
+
 	@Autowired
-	private PostsService service;
+	private MemberService service;
 	
-	@GetMapping("/{loggedUser}")
-	public List<Posting> getPost(@PathVariable("loggedUser") String user) {
-		
-		List<Posting> l=service.getPosts(user);
-		System.out.println(l);
-		return service.getPosts(user);
-		
+	@GetMapping("/{str}")
+	public List<Member> getMemberListByStr(@PathVariable("str") String str){
+		return service.readMembersByStr(str);
 	}
 	
 }

@@ -8,6 +8,7 @@ import com.woo.shorts.entity.Posting;
 
 public interface PostingRepository extends CrudRepository<Posting, Long> {
 
-	List<Posting> findTop10ByOrderBySeqDesc();
+	List<Posting> findByUserId(String str);
+	
 	
 }

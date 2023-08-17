@@ -1,9 +1,10 @@
 package com.woo.shorts.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.woo.shorts.dto.MemberDTO;
 import com.woo.shorts.entity.Member;
 import com.woo.shorts.repository.MemberRepository;
 
@@ -29,6 +30,10 @@ public class MemberServiceImpl implements MemberService {
 		
 
 	}
+	
+	public List<Member> readMembersByStr(String str){
+		return memberRepository.findByMemberIdStartsWith(str);
+	}
 
 	@Override
 	public Member login(Member member) {
@@ -38,6 +43,12 @@ public class MemberServiceImpl implements MemberService {
 				return found;
 		}
 		else return null;
+	}
+
+	@Override
+	public Member getMemberByUserId(String str) {
+		
+		return memberRepository.findByMemberId(str);
 	}
 
 }
